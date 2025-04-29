@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-      return res.status(405).json({ error: 'Método não permitido' });
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Método não permitido" });
     }
   
     const {
@@ -14,14 +14,13 @@ export default async function handler(req, res) {
       orcamento,
     } = req.body;
   
-    // Validação básica
     if (!nome || !email || !whatsapp || !resumo || !orcamento) {
-      return res.status(400).json({ error: 'Campos obrigatórios ausentes.' });
+      return res.status(400).json({ error: "Campos obrigatórios não preenchidos." });
     }
   
     try {
-      // Aqui você pode enviar para um banco de dados, planilha, API externa ou e-mail
-      console.log("📥 Novo formulário recebido:");
+      // Aqui você pode salvar os dados em um banco de dados, planilha ou outro serviço
+      console.log("📩 Novo lead recebido:");
       console.log({
         nome,
         email,
@@ -33,10 +32,11 @@ export default async function handler(req, res) {
         orcamento,
       });
   
-      return res.status(200).json({ message: 'Dados recebidos com sucesso.' });
+      // Retornar sucesso
+      return res.status(200).json({ success: true, message: "Dados recebidos com sucesso!" });
     } catch (error) {
-      console.error('Erro ao processar dados:', error);
-      return res.status(500).json({ error: 'Erro interno do servidor.' });
+      console.error("Erro ao processar o lead:", error);
+      return res.status(500).json({ error: "Erro interno no servidor." });
     }
   }
   
